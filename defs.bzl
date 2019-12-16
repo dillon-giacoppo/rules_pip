@@ -29,7 +29,7 @@ pip_repository = repository_rule(
         "python_interpreter": attr.string(default="python3"),
         "_script": attr.label(
             executable=True,
-            default=Label("//tools:wheel_wrapper.py"),
+            default=Label("//src:extract_wheels.py"),
             cfg="host",
         ),
     },
