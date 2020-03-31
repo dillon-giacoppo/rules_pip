@@ -102,7 +102,7 @@ class TestImplicitNamespacePackages(unittest.TestCase):
         directory.add_file("foo/buu/bii.py")
 
         expected = {
-            directory.root() + "/fooDELIBERATELY_BROKENTEST",
+            directory.root() + "/foo",
             directory.root() + "/foo/bar",
             directory.root() + "/foo/bee",
         }
