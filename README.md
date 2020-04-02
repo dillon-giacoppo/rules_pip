@@ -4,7 +4,7 @@ Bazel rules to transitively fetch and install Python dependencies from a require
 
 ## Features
 
-The rules address most of the top packaging issues in rules_python. This means the rules support common packages such
+The rules address most of the top packaging issues in [`bazelbuild/rules_python`](https://github.com/bazelbuild/rules_python). This means the rules support common packages such
 as tensorflow and google.cloud natively.
 
 * Transitive dependency resolution:
