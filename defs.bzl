@@ -40,6 +40,15 @@ def _pip_repository_impl(rctx):
             "\"" + " ".join(rctx.attr.extra_pip_args) + "\"",
         ]
 
+    if rctx.attr.pip_data_exclude:
+        pip_data_exclude_quoted = []
+        for exclude_param in rctx.attr.pip_data_exclude:
+            pip_data_exclude_quoted.append("\"" + exclude_param + "\"")
+        args += [
+            "--pip_data_exclude",
+            "[" + ",".join(pip_data_exclude_quoted) + "]",
+        ]
+
     result = rctx.execute(
         args,
         environment = {
@@ -70,6 +79,9 @@ python_interpreter.
         "quiet": attr.bool(default = True),
         "extra_pip_args": attr.string_list(
             doc = "Extra arguments to pass on to pip. Must not contain spaces.",
+        ),
+        "pip_data_exclude": attr.string_list(
+            doc = "Additional data exclusion parameters to add to the pip packages BUILD file.",
         ),
     },
     implementation = _pip_repository_impl,
