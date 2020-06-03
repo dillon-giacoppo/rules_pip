@@ -15,6 +15,9 @@ def generate_build_file_contents(name: str, dependencies: List[str]) -> str:
 
     Returns:
         A complete BUILD file as a string
+
+    We allow for empty Python sources as for Wheels containing only compiled C code
+    there may be no Python sources whatsoever (e.g. packages written in Cython: like `pymssql`).
     """
 
     return textwrap.dedent(
