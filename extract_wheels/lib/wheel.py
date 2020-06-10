@@ -3,7 +3,7 @@ import glob
 import os
 import stat
 import zipfile
-from typing import Dict, Optional, Set
+from typing import Dict, Optional, Set, Text, Union
 
 import pkg_resources
 import pkginfo
