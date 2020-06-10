@@ -62,14 +62,15 @@ class Wheel:
             # The following logic is borrowed from Pip:
             # https://github.com/pypa/pip/blob/cc48c07b64f338ac5e347d90f6cb4efc22ed0d0b/src/pip/_internal/utils/unpacking.py#L240
             for info in whl.infolist():
+                name = info.filename
                 # Do not attempt to modify directories.
-                if fn.endswith("/") or fn.endswith("\\"):
+                if name.endswith("/") or name.endswith("\\"):
                     continue
                 mode = info.external_attr >> 16
                 # if mode and regular file and any execute permissions for
                 # user/group/world?
                 if mode and stat.S_ISREG(mode) and mode & 0o111:
-                    name = os.path.join(directory, info.filename)
+                    name = os.path.join(directory, name)
                     set_extracted_file_to_default_mode_plus_executable(name)
 
 
