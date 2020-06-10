@@ -9,16 +9,14 @@ import pkg_resources
 import pkginfo
 
 
-def current_umask():
-    # type: () -> int
+def current_umask() -> int:
     """Get the current umask which involves having to set it temporarily."""
     mask = os.umask(0)
     os.umask(mask)
     return mask
 
 
-def set_extracted_file_to_default_mode_plus_executable(path):
-    # type: (Union[str, Text]) -> None
+def set_extracted_file_to_default_mode_plus_executable(path: str) -> None:
     """
     Make file present at path have execute for user/group/world
     (chmod +x) is no-op on windows per python docs
@@ -64,6 +62,9 @@ class Wheel:
             # The following logic is borrowed from Pip:
             # https://github.com/pypa/pip/blob/cc48c07b64f338ac5e347d90f6cb4efc22ed0d0b/src/pip/_internal/utils/unpacking.py#L240
             for info in whl.infolist():
+                # Do not attempt to modify directories.
+                if fn.endswith("/") or fn.endswith("\\"):
+                    continue
                 mode = info.external_attr >> 16
                 # if mode and regular file and any execute permissions for
                 # user/group/world?
