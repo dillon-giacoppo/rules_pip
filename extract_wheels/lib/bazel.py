@@ -133,10 +133,6 @@ def extract_wheel(wheel_file: str, extras: Dict[str, Set[str]]) -> str:
     os.mkdir(directory)
     whl.unzip(directory)
 
-    for dirName, _, fileList in os.walk(directory):
-        for file in fileList:
-            os.chmod(os.path.join(dirName, file), 0o555)
-
     # Note: Order of operations matters here
     purelib.spread_purelib_into_root(directory)
     setup_namespace_pkg_compatibility(directory)
