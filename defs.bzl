@@ -41,12 +41,9 @@ def _pip_repository_impl(rctx):
         ]
 
     if rctx.attr.pip_data_exclude:
-        pip_data_exclude_quoted = []
-        for exclude_param in rctx.attr.pip_data_exclude:
-            pip_data_exclude_quoted.append("\"" + exclude_param + "\"")
         args += [
             "--pip_data_exclude",
-            "[" + ",".join(pip_data_exclude_quoted) + "]",
+            struct(exclude = rctx.attr.pip_data_exclude).to_json(),
         ]
 
     result = rctx.execute(

@@ -82,7 +82,7 @@ def main() -> None:
     extras = requirements.parse_extras(args.requirements)
 
     if args.pip_data_exclude:
-        pip_data_exclude = json.loads(args.pip_data_exclude)
+        pip_data_exclude = json.loads(args.pip_data_exclude)["exclude"]
     else:
         pip_data_exclude = []
 
